@@ -9,7 +9,8 @@ const state = {
         gameVelocity: 100,
         hitPosition: 0,
         result: 0,
-        currentTime: 60
+        currentTime: 60,
+        randomNumber: null
     },
     actions: {
         timeId: setInterval(randomSquare, 1000),
@@ -39,7 +40,12 @@ function randomSquare() {
         square.classList.remove('enemy');
     })
 
-    let randomNumber = Math.floor(Math.random() * 9);
+    let randomNumber;
+    do {
+        randomNumber = Math.floor(Math.random() * 9);
+    } while(randomNumber === state.values.randomNumber);
+
+    state.values.randomNumber = randomNumber;
     let randomSquare = state.view.squares[randomNumber];
 
     randomSquare.classList.add('enemy');
